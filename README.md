@@ -1,6 +1,8 @@
 Terraform `secret` Provider &#x1F49C;
 =========================
 
+<img src="tweag-pixel.png" width="100%" height="3">
+
 The `secret` provider has one mission: store secrets in the Terraform state.
 
 Please be careful about your security stance before adopting this!
