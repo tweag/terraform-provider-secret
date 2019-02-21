@@ -1,5 +1,5 @@
 Terraform `secret` Provider &#x1F49C;
-=========================
+===================================
 
 <img src="tweag-pixel.png" width="100%" height="3">
 
@@ -18,14 +18,38 @@ the new secret which makes key rotation easier.
 This is only a better solution than storing secrets in Git. Look at adopting
 Hashicorp Vault in the longer term.
 
-Requirements
-------------
+## Requirements
 
 -	[Terraform](https://www.terraform.io/downloads.html) 0.10.x
 -	[Go](https://golang.org/doc/install) 1.8 (to build the provider plugin)
 
-Building The Provider
----------------------
+## How to install
+
+### Using pre-built binary
+
+1. Download the binary from the project [releases page](https://github.com/sl1pm4t/terraform-provider-secret/releases/latest)
+2. Extract provider binary from tar file.
+3. Copy to `$PATH` or the `~/.terraform.d/plugins` directory so Terraform can find it.
+
+### Building from source
+
+1. Follow these [instructions](https://golang.org/doc/install) to setup a Golang development environment.
+2. Use `go get` to pull down this repository and compile the binary:
+
+```
+go get -u -v github.com/tweag/terraform-provider-secret
+```
+
+### Using Nix
+
+If you are lucky enough to use [Nix](https://builtwithnix.org), it's
+already part of the full terraform distribution:
+
+```sh
+nix-env -iA nixpkgs.terraform-full
+```
+
+## Building The Provider
 
 Clone repository to: `$GOPATH/src/github.com/tweag/terraform-provider-secret`
 
@@ -42,10 +66,43 @@ $ make build
 
 Using the provider
 ----------------------
-## Fill in for each provider
 
-Developing the Provider
----------------------------
+### `secret_resource`
+
+**Schema**:
+
+* `value`, string: Returns the value of the secret
+
+### Example
+
+Here we declare a new resource that will contain the secret.
+
+```tf
+resource "secret_resource" "datadog_api_key" {
+  lifecycle {
+    # avoid accidentally loosing the secret
+    prevent_destroy = true
+  }
+}
+```
+
+To populate the secret, run
+```
+terraform import secret_resourc.datadog_api_key TOKEN
+```
+where `TOKEN` is the value of the token.
+
+Once imported, the secret can be accessed using
+`secret_resourc.datadog_api_key.value`
+
+### Rotating secrets
+
+```sh
+terraform state rm secret_resource.datadog_api_key
+terraform import secret_resourc.datadog_api_key NEW_TOKEN
+```
+
+## Developing the Provider
 
 If you wish to work on the provider, you'll first need [Go](http://www.golang.org) installed on your machine (version 1.8+ is *required*). You'll also need to correctly setup a [GOPATH](http://golang.org/doc/code.html#GOPATH), as well as adding `$GOPATH/bin` to your `$PATH`.
 
