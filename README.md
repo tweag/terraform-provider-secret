@@ -134,9 +134,12 @@ This work is licensed under the Mozilla Public License 2.0. See
 
 ## Sponsors
 
-[![Digital Asset](https://avatars1.githubusercontent.com/u/9829909?s=200&v=4)](http://digitalasset.com)
+This work has been sponsored by [Digital Asset](https://digitalasset.com) and [Tweag I/O](https://tweag.io).
 
-This work is maintained by [<img src="https://www.tweag.io/img/tweag-med.png" height="30">](http://tweag.io)
+[![Digital Asset](https://avatars1.githubusercontent.com/u/9829909?s=200&v=4)](http://digitalasset.com)
+[![Tweag I/O](https://avatars1.githubusercontent.com/u/6057932?s=200&v=4)](https://tweag.io)
+
+This repository is maintained by [Tweag I/O](http://tweag.io)
 
 Have questions? Need help? Tweet at
 [@tweagio](http://twitter.com/tweagio).
