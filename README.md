@@ -86,18 +86,18 @@ resource "secret_resource" "datadog_api_key" {
 
 To populate the secret, run
 ```
-terraform import secret_resourc.datadog_api_key TOKEN
+terraform import secret_resource.datadog_api_key TOKEN
 ```
 where `TOKEN` is the value of the token.
 
 Once imported, the secret can be accessed using
-`secret_resourc.datadog_api_key.value`
+`secret_resource.datadog_api_key.value`
 
 ### Rotating secrets
 
 ```sh
 terraform state rm secret_resource.datadog_api_key
-terraform import secret_resourc.datadog_api_key NEW_TOKEN
+terraform import secret_resource.datadog_api_key NEW_TOKEN
 ```
 
 ## Developing the Provider
