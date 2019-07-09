@@ -23,12 +23,6 @@ Hashicorp Vault in the longer term.
 
 ## How to install
 
-### Using pre-built binary
-
-1. Download the binary from the project [releases page](https://github.com/sl1pm4t/terraform-provider-secret/releases/latest)
-2. Extract provider binary from tar file.
-3. Copy to `$PATH` or the `~/.terraform.d/plugins` directory so Terraform can find it.
-
 ### Building from source
 
 1. Follow these [instructions](https://golang.org/doc/install) to setup a Golang development environment.
