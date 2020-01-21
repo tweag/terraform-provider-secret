@@ -13,13 +13,13 @@ into the state file?
 When using a remote state file, the state is automatically distributed with
 the new secret which makes key rotation easier.
 
-This is only a better solution than storing secrets in Git. Look at adopting
+This is a better solution than storing secrets in Git. Look at adopting
 Hashicorp Vault in the longer term.
 
 ## Requirements
 
--	[Terraform](https://www.terraform.io/downloads.html) 0.10.x
--	[Go](https://golang.org/doc/install) 1.8 (to build the provider plugin)
+-	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
+-	[Go](https://golang.org/doc/install) 1.11 (to build the provider plugin)
 
 ## How to install
 
@@ -43,21 +43,20 @@ nix-env -iA nixpkgs.terraform-full
 
 ## Building The Provider
 
-Clone repository to: `$GOPATH/src/github.com/tweag/terraform-provider-secret`
+Clone the repository:
 
 ```sh
-$ git clone git@github.com:tweag/terraform-provider-secret $GOPATH/src/github.com/tweag/terraform-provider-secret
+$ git clone git@github.com:tweag/terraform-provider-secret
 ```
 
 Enter the provider directory and build the provider
 
 ```sh
-$ cd $GOPATH/src/github.com/tweag/terraform-provider-secret
-$ make build
+$ cd terraform-provider-secret
+$ GO111MODULE=on go build
 ```
 
-Using the provider
-----------------------
+## Using the provider
 
 ### `secret_resource`
 
