@@ -79,10 +79,15 @@ resource "secret_resource" "datadog_api_key" {
 ```
 
 To populate the secret, run
-```
+```sh
 terraform import secret_resource.datadog_api_key TOKEN
 ```
 where `TOKEN` is the value of the token.
+
+Or to import from a file:
+```sh
+terraform import secret_resource.datadog_api_key "$(< ./datadog-api-key)"
+```
 
 Once imported, the secret can be accessed using
 `secret_resource.datadog_api_key.value`
@@ -92,6 +97,26 @@ Once imported, the secret can be accessed using
 ```sh
 terraform state rm secret_resource.datadog_api_key
 terraform import secret_resource.datadog_api_key NEW_TOKEN
+```
+
+### Importing binary secrets
+
+The secret values can only contain UTF-8 encoded strings. If the secret is a
+binary key, a workaround it to encode it first as base64, then use the
+terraform `base64decode()` function on usage.
+
+Eg:
+
+```sh
+terraform import secret_resource.my_binary_key "$(base64 ./binary-key)"
+```
+
+Then on usage:
+
+```tf
+resource "other_resource" "xxx" {
+  secret = base64decode(secret_resource.my_binary_key.value)
+}
 ```
 
 ## Developing the Provider
