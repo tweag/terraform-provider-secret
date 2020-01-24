@@ -145,6 +145,11 @@ In order to run the full suite of Acceptance tests, run `make testacc`.
 $ make testacc
 ```
 
+## Related projects
+
+* https://github.com/carlpett/terraform-provider-sops - allows to decode
+  in-repo secrets on the fly.
+
 ## License
 
 This work is licensed under the Mozilla Public License 2.0. See
