@@ -21,9 +21,9 @@ Hashicorp Vault in the longer term.
 -	[Terraform](https://www.terraform.io/downloads.html) 0.12.x
 -	[Go](https://golang.org/doc/install) 1.11 (to build the provider plugin)
 
-## How to install
+## Installation
 
-### Building from source
+### Install via `go get`
 
 1. Follow these [instructions](https://golang.org/doc/install) to setup a Golang development environment.
 2. Use `go get` to pull down this repository and compile the binary:
@@ -32,7 +32,9 @@ Hashicorp Vault in the longer term.
 go get -u -v github.com/tweag/terraform-provider-secret
 ```
 
-### Using Nix
+The binary will be placed in `$GOPATH/bin` or `$HOME/go/bin` if `$GOPATH` is not set.
+
+### Install via Nix
 
 If you are lucky enough to use [Nix](https://builtwithnix.org), it's
 already part of the full terraform distribution:
@@ -41,7 +43,7 @@ already part of the full terraform distribution:
 nix-env -iA nixpkgs.terraform-full
 ```
 
-## Building The Provider
+### Compile from source
 
 Clone the repository:
 
@@ -56,9 +58,18 @@ $ cd terraform-provider-secret
 $ GO111MODULE=on go build
 ```
 
-## Using the provider
+## Usage
 
-### `secret_resource`
+### Provider installation
+
+* Copy the `terraform-provider-secret` binary to `~/.terraform.d/plugins` (recommended) or any location specified by [Terraform documentation](https://www.terraform.io/docs/extend/how-terraform-works.html#plugin-locations).
+
+* Add the line `provider "secret" {}` line to `main.tf`
+To prevent warnings, you may optionally add a version lock to the provider entry in the form of `provider "secret" { version = "~> X.Y"}` where `X.Y` is the version you wish to pin. Note that when the binary is built no version suffix is specified; you will need to manually add `_vX.Y` to the provider binary unless you directly use release from Github.
+
+* Run `terraform init`.
+
+### Using `secret_resource`
 
 **Schema**:
 
