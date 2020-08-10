@@ -55,7 +55,7 @@ jobs:
         run: |
           go get -v -t -d ./...
       - name: Build
-        run: go build -o ${REPO_NAME}_${RELEASE_VERSION}
+        run: CGO_ENABLED=0 go build -o ${REPO_NAME}_${RELEASE_VERSION}
       - name: Create archive
         run: tar -czvf ${REPO_NAME}_${RELEASE_VERSION}_${{ matrix.asset_name }}.tar.gz ${REPO_NAME}_${RELEASE_VERSION}
       - name: Upload archive to release
